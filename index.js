@@ -39,11 +39,17 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
   cors({
     // origin: ["http://localhost:3000"],
-    origin: ["https://main.dyzo0pe2jo0xu.amplifyapp.com/login"],
+    origin: [
+      "https://main.dyzo0pe2jo0xu.amplifyapp.com/login/api/",
+      "https://main--mellifluous-liger-d3ba7b.netlify.app/api/",
+      "https://mellifluous-liger-d3ba7b.netlify.app/api",
+      "http://localhost:3001/api/",
+    ],
     method: ["GET", "POST", "PATCH", "PUT"],
     credentials: true,
   })
 );
+app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* Storage * git gub rep of multer*/
@@ -79,19 +85,19 @@ app.post(
 
 /* ROUTES */
 
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 
-app.use("/posts", postRoutes);
-app.use("/search", searchRoute);
-app.use("/comment", commentRoutes);
-app.use("/chat", chatRoutes);
-app.use("/message", messageRoutes);
-app.use("/group", GroupRoutes);
-app.use("/admin", AdminRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/search", searchRoute);
+app.use("/api/comment", commentRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
+app.use("/api/group", GroupRoutes);
+app.use("/api/admin", AdminRoutes);
 app.use(
-  "/notification",
+  "/api/notification",
 
   NotificationRoutes
 );
